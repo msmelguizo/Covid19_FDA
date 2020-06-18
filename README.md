@@ -21,14 +21,14 @@ We developed 7 models for our predictions. For models 2 to 7 we use the 73,697 p
 Feature engineering: Frequency counts for the categorical variables, and means for the continuous outcomes. 
 
 For all the models we used the LightGBM library with parameters: 
-'num_leaves': 15,
-'boosting_type': 'gbdt',
-'learning_rate': 0.01, 
-'colsample_bytree': 0.6189140385454879,
-'subsample': 0.7098267979279573, 
-‘reg_alpha': 5,
-'reg_lambda': 1,
-'scale_pos_weight': 1.
+- 'num_leaves': 15,
+- 'boosting_type': 'gbdt',
+- 'learning_rate': 0.01, 
+- 'colsample_bytree': 0.6189140385454879,
+- 'subsample': 0.7098267979279573, 
+- ‘reg_alpha': 5,
+- 'reg_lambda': 1,
+- 'scale_pos_weight': 1.
 
 For binary outcome models:         'metric': {'binary_logloss', 'auc'},
 For continuous models: ‘metric’: {'rmse'}
