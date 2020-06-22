@@ -37,32 +37,36 @@ These parameters we used for another model to predict death in the ICU setting a
 
 
 ## COVID 19 Status:
-LightGBM model for Covid 19 status (binary outcome). We are counting the patients that did not receive a test as Covid negative. This assumption may not be valid.
+LightGBM model for Covid 19 status (binary outcome). We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 6,306 patients that died prior to 2,020, and the model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised test set excludes the patients that died prior to 2,020 and we predict in the test set that the patients with death certificates prior to 2,020 will be COVID negative.
 
-| 117,959 patients in the training set|
+| 117,959 patients in the training set, 25,217 died prior to 2020|
 
 |75,417 patients have a COVID test    |
 |(105,548 COVID tests)                |
 
-|73,697 are COVID positive|     |1,720 are COVID negative|  |42,542 patients do not have a test*|
-
+|73,697 are COVID positive|     |1,720 are COVID negative|  |19,045 patients do not have a test*|
 *We consider them COVID negative
 
 Note: Some patients have both a positive and a negative covid test (15,067) we consider these patients covid positive. 
 
-73,697 COVID + (62%),  44,262 COVID -  (38%)
+73,697 COVID + (74.5%),  19,045 COVID -  (20.5%)
 
-5-Fold CV AUC 0.87242
-Cutoff:TBD
+5-Fold CV AUC 0.69201
+Cutoff: 0.777 optimizing F1 value. New test set 21,440
 
 ### Risk Factors
-- DALY: Disability adjusted Life year
-- QOLS: Quality of life scale
-- QALY: Quality adjusted life year
-- Oxygen saturation in arterial blood
-- Cisplatin 50 MG injection. Cancer drug
-- Combined chemortheraphy and radiation therapy. Cancer status
-- Echocardiography: Heart disease status
+
+- Oxygen saturation in arterial blood: Pulmonary health status
+- Plain chest X-ray: Pulmonary health status
+- Transthoracic echocardiography. : Heart disease status
+- Chronic congestive heart failure (disorder): Heart disease status
+- Inpatient care plan (record artifact): Overall proxy for health status
+- Computed Radiography
+- PACLitaxel 100 MG Injection: Cancer drug
+- General examination of patient (procedure): Overall proxy for health status 
+- Non-small cell carcinoma of lung TNM stage 1: Cancer status
+- Lifestyle education regarding hypertension: Hypertension
+- Diabetes_y: Diabetes
 
 ## Days hospitalized
 
@@ -73,17 +77,22 @@ LOS 12.6 days
 Two models: 
 Model 1 to predict hospitalizations Y/N
 5-Fold CV AUC 0.67070
-Model 2 to predict LOS
-5 fold rmse 
+Cutoff: 0.254 optimizing F1 value
 
-### Risk Factors
--
--
--
+Model 2 to predict LOS
+5 fold rmse 4.46
+
+### Risk Factors for Hospitalization and Length of Stay
+- Age 
+- General examination of patient (procedure): Overall proxy for health status 
+- Lifestyle education regarding hypertension
+- HEALTHCARE EXPENSES
+- QALY: quality-adjusted life-year, is a generic measure of disease burden, including both the quality and the quantity of life lived. [1]
 
 
 ### Protective Factors
 - Never smoker
+- Female gender
 
 ## Days in ICU
 ICU
@@ -92,33 +101,56 @@ LOS 6.2 days
 
 Two models: 
 Model 1 to predict ICU stay Y/N
-5-Fold CV AUC 
+5-Fold CV AUC 0.77167
+Cutoff: 0.146 optimizing F1 value
+
 Model 2 to predict LOS
-5 fold rmse 
+5 fold rmse 2.68
 
 ### Risk Factors
+- Age
+- General examination of patient (procedure): Overall proxy for health status 
+- Estimated Glomerular Filtration Rate
+- Body Mass Index
+- DALY
 
-## Controlled Ventilator Status: LightGBM model for Controlled Ventilator status (binary outcome)
+## Controlled Ventilator Status: 
 
 Ventilator
 4,210 (5.7%)
 
-5-Fold CV AUC 
-Cutoff:TBD
+5-Fold CV AUC 0.80562
+
+### Risk Factors
+- Age
+- General examination of patient (procedure): Overall proxy for health status 
+- QALY
+- HEALTHCARE EXPENSES
 
 
-## Mortality: LightGBM model for Mortality due to Covid 19 (binary outcome)
+## Mortality: 
 Death
 5,568 (7.6%)
-5-Fold CV AUC 
-Cutoff:TBD
+5-Fold CV AUC 0.85728
+
+
+### Risk Factors
+- Age
+- QALY
+-
+
+
 
 Models include LightGBM and Neural Networks (TBD). The summary of the findings is described in results.pdf
 
-Contributors:
+## Contributors:
 
 Ashley Odom
 ashleyodom@1nformatics.com
 
 Maria Wellen
 msmelguizo@gmail.com
+
+## References:
+[1] https://en.wikipedia.org/wiki/Quality-adjusted_life_year
+[2] LightGBM
