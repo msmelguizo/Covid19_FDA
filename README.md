@@ -75,6 +75,7 @@ Cutoff: 0.777 optimizing F1 value. New test set 21,440
 ## Days hospitalized
 Code available at: 
 https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBMY_N.ipynb
+
 https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBM.ipynb
 
 Hospitalized
@@ -103,6 +104,7 @@ Model 2 to predict LOS
 
 ## Days in ICU
 Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBMY_N.ipynb
+
 https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBM.ipynb
 
 ICU
@@ -141,6 +143,7 @@ Ventilator
 
 ## Mortality: 
 Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/Death/LightGBM.ipynb
+
 Death
 5,568 (7.6%)
 5-Fold CV AUC 0.85728
