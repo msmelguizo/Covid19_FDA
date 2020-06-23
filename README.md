@@ -4,11 +4,14 @@ Solution to the COVID 19 Precision FDA challenge https://precision.fda.gov/chall
 This repository consists of different Jupyter notebooks organized in different Folders
 
 ## Descriptive: 
-Takes the raw input data from the 16 files and summarizes by counts (categorical variables) and averages (continuous variables). This notebook creates the train.csv and test.csv files used for analysis. 
+Takes the raw input data from the 16 files and summarizes by counts (categorical variables) and averages (continuous variables). This notebook creates the train.csv and test.csv files used for analysis.
 
 Train data-set has 117,959 patients in the patients table. Additionally there are 16 tables with historical data including allergies, conditions, and observations among others. We created a train dataset that includes summary statistics in the longitudinal tables as means and frequency counts. In total we have over 900 variables and 117,959 patients.
+Code available at https://github.com/msmelguizo/Covid19_FDA/blob/master/Descriptive/Creation%20of%20Train%20and%20Test%20datasets%20and%20exploratory%20Analysis.ipynb 
 
 There are 29,492 patients in the test set. Test set information of all 2020 records was removed from the dataset. Preliminary models showed almost perfect predictive accuracy on COVID status, however the predictions on the test set were really narrow and the model predicted very few COVID cases. We conducted adversarial validation to separate train and test sets and concluded that the train and test sets were very different. This made us review the dataset and we decided to train the models by removing the 2020 training data. Adversarial validation on this revised dataset shows that the databases are equivalent. So we decided to proceed with this assumption. In addition, we removed variables that were excluded from the dataset they include: Encounter for symptom (procedure), Acute respiratory failure (disorder)_x.
+
+Adversarial validation code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/AdversarialValidation/LightGBM-AdversarialValidation.ipynb
 
 Additionally we removed CITY and ZIP code because we have latitude and longitude.
 
@@ -37,6 +40,7 @@ These parameters we used for another model to predict death in the ICU setting a
 
 
 ## COVID 19 Status:
+Model available at: https://github.com/msmelguizo/Covid19_FDA/tree/master/COVID
 LightGBM model for Covid 19 status (binary outcome). We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 6,306 patients that died prior to 2,020, and the model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised test set excludes the patients that died prior to 2,020 and we predict in the test set that the patients with death certificates prior to 2,020 will be COVID negative.
 
 | 117,959 patients in the training set, 25,217 died prior to 2020|
@@ -69,6 +73,9 @@ Cutoff: 0.777 optimizing F1 value. New test set 21,440
 - Diabetes_y: Diabetes
 
 ## Days hospitalized
+Code available at: 
+https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBMY_N.ipynb
+https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBM.ipynb
 
 Hospitalized
 20,393  (27.7%)
@@ -95,6 +102,9 @@ Model 2 to predict LOS
 - Female gender
 
 ## Days in ICU
+Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBMY_N.ipynb
+https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBM.ipynb
+
 ICU
 4,981 (6.8%)
 LOS 6.2 days
@@ -115,6 +125,7 @@ Model 2 to predict LOS
 - DALY
 
 ## Controlled Ventilator Status: 
+Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/LightGBM.ipynb
 
 Ventilator
 4,210 (5.7%)
@@ -129,6 +140,7 @@ Ventilator
 
 
 ## Mortality: 
+Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/Death/LightGBM.ipynb
 Death
 5,568 (7.6%)
 5-Fold CV AUC 0.85728
