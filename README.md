@@ -169,6 +169,6 @@ msmelguizo@gmail.com
 ## References:
 [1] https://en.wikipedia.org/wiki/Quality-adjusted_life_year
 
-[2] LightGBM
+[2] LightGBM. G. Ke, Q. Meng, T. Finley, T. Wang, W. Chen, W. Ma, Q. Ye, and T.-Y. Liu.  Lightgbm:  Ahighly efficient gradient boosting decision tree. InAdvances in Neural Information ProcessingSystems, pages 3149–3157, 2017.
 
 [3] https://en.wikipedia.org/wiki/Disability-adjusted_life_year
