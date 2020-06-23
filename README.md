@@ -124,7 +124,7 @@ Model 2 to predict LOS
 - General examination of patient (procedure): Overall proxy for health status 
 - Estimated Glomerular Filtration Rate
 - Body Mass Index
-- DALY
+- DALY: Disability-adjusted life year, is a measure of overall disease burden, expressed as the number of years lost due to ill-health, disability or early death. [3]
 
 ## Controlled Ventilator Status: 
 Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/LightGBM.ipynb
@@ -168,4 +168,7 @@ msmelguizo@gmail.com
 
 ## References:
 [1] https://en.wikipedia.org/wiki/Quality-adjusted_life_year
+
 [2] LightGBM
+
+[3] https://en.wikipedia.org/wiki/Disability-adjusted_life_year
