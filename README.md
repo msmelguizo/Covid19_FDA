@@ -41,7 +41,7 @@ These parameters we used for another model to predict death in the ICU setting a
 
 ## COVID 19 Status:
 Model available at: https://github.com/msmelguizo/Covid19_FDA/tree/master/COVID
-LightGBM model for Covid 19 status (binary outcome). We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 6,306 patients that died prior to 2020. The model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised train set excludes the patients that died prior to 2020 and we predict in the test set that the patients with death certificates prior to 2020 will be COVID negative.
+LightGBM model for Covid 19 status (binary outcome). We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 25,217 patients in the train set that died prior to 2020. The model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised train set excludes the patients that died prior to 2020 and we predict in the test set that the patients with death certificates prior to 2020 will be COVID negative (6,306 patients).
 
 | 117,959 patients in the training set, 25,217 died prior to 2020|
 
