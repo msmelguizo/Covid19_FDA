@@ -40,13 +40,13 @@ For continuous models: ‘metric’: {'rmse'}
 These parameters we used for another model to predict death in the ICU setting and they seem to work well for our purposes.
 
 ### Neural Network (NN) Models
-For the NN models we used the fastai library [4]
+For the NN models we used the fastai library [4] with parameters:
 
-layers=[3600, 1800]
-embedding dropout emb_drop=0.05
-epochs=15
-For categorical outcomes: Loss function categorical crossentropy or focal loss
-For continuous outcomes: mse loss
+- layers=[3600, 1800]
+- embedding dropout emb_drop=0.05
+- epochs=15
+- For categorical outcomes: Loss function categorical crossentropy or focal loss
+- For continuous outcomes: mse loss
 
 
 ## COVID 19 Status:
@@ -88,19 +88,16 @@ Cutoff:  optimizing F1 value.
 
 ### Risk Factors from NN Model
 
-- Chronic congestive heart failure (disorder)_y : Heart disease status 	
--	Inpatient care plan (record artifact): Overall proxy for health status	
+- Transthoracic echocardiography: Heart disease status 
 - Plain chest X-ray: Pulmonary health status 	
-- Transthoracic echocardiography: Heart disease status 	
-- Heart failure self management plan: Heart disease status 	
-- Plain chest X-ray (procedure): Pulmonary health status 	
-- Encounter for Problem: Overall proxy for health status 	
+-	Inpatient care plan (record artifact): Overall proxy for health status	
 - Inpatient stay (finding): Overall proxy for health status 	
-- Chronic congestive heart failure (disorder)_x : Heart disease status 	
+- Encounter for Problem: Overall proxy for health status 	
+- Transthoracic three dimensional ultrasonography of the heart: Heart disease status  	
+- Plain chest X-ray (procedure): Pulmonary health status 	
+- Heart failure self management plan: Heart disease status 	
+- Chronic congestive heart failure (disorder)_ x : Heart disease status 		
 - Glomerular filtration rate/1.73 sq M.predicted : Kidney function marker	
-- Transthoracic three dimensional ultrasonograph... 	
-- 24 HR metoprolol succinate 100 MG Extended Rel... : Blood pressure medication	/ Heart failure medication
-- Furosemide 40 MG Oral Tablet: Diuretic
 
 
 ## Days hospitalized
@@ -192,6 +189,14 @@ Death
 ### Risk Factors from LightGBM Model
 - Age
 - QALY: Quality-adjusted life-year is a generic measure of disease burden, including both the quality and the quantity of life lived. [1]
+
+### Risk Factors from NN Model
+-
+-
+-
+-
+-
+
 
 
 ## Contributors:
