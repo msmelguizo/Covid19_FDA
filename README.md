@@ -23,6 +23,7 @@ We developed 7 models for our predictions. For models 2 to 7 we use the 73,697 p
 
 Feature engineering: Frequency counts for the categorical variables, and means for the continuous outcomes. 
 
+### LigthGBM Models
 For all the models we used the LightGBM [2] library with parameters: 
 - 'num_leaves': 15,
 - 'boosting_type': 'gbdt',
@@ -38,10 +39,20 @@ For continuous models: ‘metric’: {'rmse'}
 
 These parameters we used for another model to predict death in the ICU setting and they seem to work well for our purposes.
 
+### Neural Network (NN) Models
+For the NN models we used the fastai library [4]
+
+layers=[3600, 1800]
+embedding dropout emb_drop=0.05
+epochs=15
+For categorical outcomes: Loss function categorical crossentropy or focal loss
+For continuous outcomes: mse loss
+
 
 ## COVID 19 Status:
-Model available at: https://github.com/msmelguizo/Covid19_FDA/tree/master/COVID
-LightGBM model for Covid 19 status (binary outcome). We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 25,217 patients in the train set that died prior to 2020. The model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised train set excludes the patients that died prior to 2020 and we predict in the test set that the patients with death certificates prior to 2020 will be COVID negative (6,306 patients).
+LigthGBM Model available at: https://github.com/msmelguizo/Covid19_FDA/tree/master/COVID
+NN Model available at: 
+We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 25,217 patients in the train set that died prior to 2020. The model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised train set excludes the patients that died prior to 2020 and we predict in the test set that the patients with death certificates prior to 2020 will be COVID negative (6,306 patients).
 
 | 117,959 patients in the training set, 25,217 died prior to 2020|
 
@@ -55,28 +66,50 @@ Note: Some patients have both a positive and a negative covid test (15,067) we c
 
 73,697 COVID + (74.5%),  19,045 COVID -  (20.5%)
 
-5-Fold CV AUC 0.69201
-Cutoff: 0.777 optimizing F1 value. New test set 21,440
+LigthGBM 5-Fold CV AUC 0.69201
+Cutoff: 0.777 optimizing F1 value. 
 
-### Risk Factors
+LigthGBM 5-Fold CV AUC 
+Cutoff:  optimizing F1 value. 
+
+### Risk Factors from LightGBM Model
 
 - Oxygen saturation in arterial blood: Pulmonary health status
 - Plain chest X-ray: Pulmonary health status
 - Transthoracic echocardiography. : Heart disease status
 - Chronic congestive heart failure (disorder): Heart disease status
 - Inpatient care plan (record artifact): Overall proxy for health status
-- Computed Radiography
+- Computed Radiography: Overall proxy for health status
 - PACLitaxel 100 MG Injection: Cancer drug
 - General examination of patient (procedure): Overall proxy for health status 
 - Non-small cell carcinoma of lung TNM stage 1: Cancer status
 - Lifestyle education regarding hypertension: Hypertension
 - Diabetes_y: Diabetes
 
+### Risk Factors from NN Model
+
+- Chronic congestive heart failure (disorder)_y : Heart disease status 	
+-	Inpatient care plan (record artifact): Overall proxy for health status	
+- Plain chest X-ray: Pulmonary health status 	
+- Transthoracic echocardiography: Heart disease status 	
+- Heart failure self management plan: Heart disease status 	
+- Plain chest X-ray (procedure): Pulmonary health status 	
+- Encounter for Problem: Overall proxy for health status 	
+- Inpatient stay (finding): Overall proxy for health status 	
+- Chronic congestive heart failure (disorder)_x : Heart disease status 	
+- Glomerular filtration rate/1.73 sq M.predicted : Kidney function marker	
+- Transthoracic three dimensional ultrasonograph... 	
+- 24 HR metoprolol succinate 100 MG Extended Rel... : Blood pressure medication	/ Heart failure medication
+- Furosemide 40 MG Oral Tablet: Diuretic
+
+
 ## Days hospitalized
-Code available at: 
+LigthGBM model available at: 
 https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBMY_N.ipynb
 
 https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBM.ipynb
+
+NN Model available at: 
 
 Hospitalized
 20,393  (27.7%)
@@ -90,22 +123,27 @@ Cutoff: 0.254 optimizing F1 value
 Model 2 to predict LOS
 5 fold rmse 4.46
 
-### Risk Factors for Hospitalization and Length of Stay
+### Risk Factors for Hospitalization and Length of Stay from LightGBM Model
 - Age 
 - General examination of patient (procedure): Overall proxy for health status 
-- Lifestyle education regarding hypertension
-- HEALTHCARE EXPENSES
+- Lifestyle education regarding hypertension: Hypertension
+- Healthcare Expenses: Overall proxy for health status 
 - QALY: quality-adjusted life-year, is a generic measure of disease burden, including both the quality and the quantity of life lived. [1]
-
 
 ### Protective Factors
 - Never smoker
 - Female gender
 
+### Risk Factors for Length of Stay from NN Model
+
+
+
 ## Days in ICU
-Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBMY_N.ipynb
+LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBMY_N.ipynb
 
 https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBM.ipynb
+
+NN Model available at: 
 
 ICU
 4,981 (6.8%)
@@ -119,41 +157,42 @@ Cutoff: 0.146 optimizing F1 value
 Model 2 to predict LOS
 5 fold rmse 2.68
 
-### Risk Factors
+### Risk Factors from LightGBM Model
 - Age
 - General examination of patient (procedure): Overall proxy for health status 
-- Estimated Glomerular Filtration Rate: Kidney failure marker
+- Estimated Glomerular Filtration Rate: Kidney function marker
 - Body Mass Index: Obesity marker
 - DALY: Disability-adjusted life year, is a measure of overall disease burden, expressed as the number of years lost due to ill-health, disability or early death. [3]
 
 ## Controlled Ventilator Status: 
-Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/LightGBM.ipynb
+LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/LightGBM.ipynb
+
+NN Model available at: 
 
 Ventilator
 4,210 (5.7%)
 
 5-Fold CV AUC 0.80562
 
-### Risk Factors
+### Risk Factors from LightGBM Model
 - Age
 - General examination of patient (procedure): Overall proxy for health status 
 - QALY: Quality-adjusted life-year is a generic measure of disease burden, including both the quality and the quantity of life lived.[1]
-- HEALTHCARE EXPENSES
+- Healthcare Expenses: Overall proxy for health status 
 
 
 ## Mortality: 
-Code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/Death/LightGBM.ipynb
+LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/Death/LightGBM.ipynb
 
 Death
 5,568 (7.6%)
 5-Fold CV AUC 0.85728
 
 
-### Risk Factors
+### Risk Factors from LightGBM Model
 - Age
 - QALY: Quality-adjusted life-year is a generic measure of disease burden, including both the quality and the quantity of life lived. [1]
 
-Models include LightGBM and Neural Networks (TBD). The summary of the findings is described in results.pdf
 
 ## Contributors:
 
@@ -169,3 +208,6 @@ msmelguizo@gmail.com
 [2] LightGBM. G. Ke, Q. Meng, T. Finley, T. Wang, W. Chen, W. Ma, Q. Ye, and T.-Y. Liu.  Lightgbm:  Ahighly efficient gradient boosting decision tree. InAdvances in Neural Information ProcessingSystems, pages 3149–3157, 2017.
 
 [3] https://en.wikipedia.org/wiki/Disability-adjusted_life_year
+
+[4] Howard, Jeremy and others. fastai. GitHub. https://github.com/fastai/fastai . 2018
+
