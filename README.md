@@ -192,7 +192,7 @@ Ventilator
 4,210 (5.7%)
 
 - LightGBM 5-Fold CV AUC 0.80562
-- NN 5-Fold CV AUC 
+- NN 5-Fold CV AUC 0.77433
 
 ### Risk Factors from LightGBM Model
 - Age
