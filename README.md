@@ -36,6 +36,7 @@ For all the models we used the LightGBM [2] library with parameters:
 
 For binary outcome models:         'metric': {'binary_logloss', 'auc'},
 For continuous models: ‘metric’: {'rmse'}
+rmse: root mean squared error
 
 We used these parameters for another model to predict death in an ICU setting and they seem to work well for our purposes.
 
@@ -45,6 +46,7 @@ For the NN models we used the fastai library [4] with parameters:
 - layers=[3600, 1800]
 - embedding dropout emb_drop=0.05
 - epochs=15
+- learning rate = 1e-2
 - For categorical outcomes: Loss function categorical crossentropy 
 - For continuous outcomes: mse loss
 
@@ -165,7 +167,7 @@ LOS 6.2 days
 - 5 fold rmse 2.68
 
 - NN model:
-- 5 fold rmse
+- 5 fold rmse 3.09
 
 ### Risk Factors from LightGBM Model
 - Age
@@ -173,6 +175,14 @@ LOS 6.2 days
 - Estimated Glomerular Filtration Rate: Kidney function marker
 - Body Mass Index: Obesity marker
 - DALY: Disability-adjusted life year, is a measure of overall disease burden, expressed as the number of years lost due to ill-health, disability or early death. [3]
+
+
+### Risk Factors for Length of Stay from NN Model
+- Admission to trauma (surgery department): Overall proxy for health status 
+- Bullet wound: Overall proxy for health status 
+- Primary malignant neoplasm of the colon: Cancer status
+- Cystic Fibrosis
+
 
 ## Controlled Ventilator Status: 
 - LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/LightGBM.ipynb
@@ -191,6 +201,10 @@ Ventilator
 - Healthcare Expenses: Overall proxy for health status 
 
 ### Risk Factors for Length of Stay from NN Model
+-
+-
+-
+-
 
 
 ## Mortality: 
@@ -204,15 +218,15 @@ Death
 ### Risk Factors from LightGBM Model
 - Age
 - QALY: Quality-adjusted life-year is a generic measure of disease burden, including both the quality and the quantity of life lived. [1]
+- Healthcare expenses: Overall proxy for health status 
+- PACLitaxel 100MG injection: Drug for cancer 
 
 ### Risk Factors from NN Model
--
--
--
--
--
+- Piperacillin / Tazobactam: Previous infection status
+- Urine analysis resulst positive for: brown color, protein, ketone, and ammoniacal
 
-
+### Protective Factors
+- Never smoker
 
 ## Contributors:
 
