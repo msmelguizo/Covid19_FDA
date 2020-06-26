@@ -11,7 +11,7 @@ Train data-set has 117,959 patients in the patients table. Additionally there ar
 
 There are 29,492 patients in the test set. The organizers removed the test set information of all 2020 records from the dataset because the goal is to investigate risk factors for COVID prior to the virus being transmited. Preliminary models showed almost perfect predictive accuracy on COVID status, however the predictions on the test set were very narrow and the model predicted very few COVID cases. We conducted adversarial validation to separate train and test sets and concluded that the train and test sets were very different. Therefore we reviewed the dataset and decided to train the models by removing the 2020 training data. Adversarial validation on this revised dataset shows that the databases are equivalent. We decided to proceed with this assumption of training data with information before 2020. In addition, we removed variables that were excluded from the test dataset as we can not make predictions with them. They included: Encounter for symptom (procedure), and Acute respiratory failure (disorder)_x.
 
-Adversarial validation code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/AdversarialValidation/LightGBM-AdversarialValidation.ipynb
+- Adversarial validation code available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/AdversarialValidation/LightGBM-AdversarialValidation.ipynb
 
 We also removed CITY and ZIP code because we have latitude and longitude.
 
