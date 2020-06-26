@@ -135,7 +135,12 @@ LOS 12.6 days
 - Female gender
 
 ### Risk Factors for Length of Stay from NN Model
-
+- Chilhood asthma: Asthma status
+- Well child visit (procedure): Overall proxy for health status 
+- Asthma self management: Asthma status
+- Chilhood asthma_x: Asthma status
+- Non urgent orthopedic admission: Overall proxy for health status 
+- Oxygen saturation in arterial blood: Pulmonary health status
 
 
 ## Days in ICU
