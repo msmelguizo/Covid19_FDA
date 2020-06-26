@@ -156,7 +156,7 @@ ICU
 4,981 (6.8%)
 LOS 6.2 days
 
-- Two models: 
+- Two LightGBM models: 
 - Model 1 to predict ICU stay Y/N
 - 5-Fold CV AUC 0.77167
 - Cutoff: 0.146 optimizing F1 value
@@ -181,8 +181,8 @@ LOS 6.2 days
 Ventilator
 4,210 (5.7%)
 
-- 5-Fold CV AUC 0.80562
-- 5-Fold CV AUC 
+- LightGBM 5-Fold CV AUC 0.80562
+- NN 5-Fold CV AUC 
 
 ### Risk Factors from LightGBM Model
 - Age
@@ -198,8 +198,8 @@ LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/mast
 
 Death
 5,568 (7.6%)
-- 5-Fold CV AUC 0.85728
-- 5-Fold CV AUC 
+- LightGBM 5-Fold CV AUC 0.85728
+- NN 5-Fold CV AUC 0.81049
 
 ### Risk Factors from LightGBM Model
 - Age
