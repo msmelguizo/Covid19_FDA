@@ -50,7 +50,7 @@ For the NN models we used the fastai library [4] with parameters:
 
 
 ## COVID 19 Status:
-- LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/tree/master/COVID
+- LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/COVID/LightGBM.ipynb
 - NN model available at:
 
 We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 25,217 patients in the train set that died prior to 2020. The model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised train set excludes the patients that died prior to 2020 and we predict in the test set that the patients with death certificates prior to 2020 will be COVID negative (6,306 patients).
