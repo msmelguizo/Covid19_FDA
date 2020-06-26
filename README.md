@@ -19,7 +19,7 @@ We also removed CITY and ZIP code because we have latitude and longitude.
 
 For training, we used 5 fold cross validation using the python sklearn library Kfold.
 
-We developed 7 models for our predictions. For models 2 to 7 we use the 73,697 patients that have a COVID positive test.
+We developed 7 models for our predictions using LightGBM, and 5 models for Neural Networks (NN). For models 2 to 7 we use the 73,697 patients that have a COVID positive test.
 
 Feature engineering: Frequency counts for the categorical variables, and means for the continuous outcomes. 
 
@@ -37,7 +37,7 @@ For all the models we used the LightGBM [2] library with parameters:
 For binary outcome models:         'metric': {'binary_logloss', 'auc'},
 For continuous models: ‘metric’: {'rmse'}
 
-These parameters we used for another model to predict death in the ICU setting and they seem to work well for our purposes.
+We used these parameters for another model to predict death in an ICU setting and they seem to work well for our purposes.
 
 ### Neural Network (NN) Models
 For the NN models we used the fastai library [4] with parameters:
@@ -45,13 +45,14 @@ For the NN models we used the fastai library [4] with parameters:
 - layers=[3600, 1800]
 - embedding dropout emb_drop=0.05
 - epochs=15
-- For categorical outcomes: Loss function categorical crossentropy or focal loss
+- For categorical outcomes: Loss function categorical crossentropy 
 - For continuous outcomes: mse loss
 
 
 ## COVID 19 Status:
-LigthGBM Model available at: https://github.com/msmelguizo/Covid19_FDA/tree/master/COVID
-NN Model available at: 
+- LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/tree/master/COVID
+- NN model available at:
+
 We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 25,217 patients in the train set that died prior to 2020. The model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised train set excludes the patients that died prior to 2020 and we predict in the test set that the patients with death certificates prior to 2020 will be COVID negative (6,306 patients).
 
 | 117,959 patients in the training set, 25,217 died prior to 2020|
@@ -66,11 +67,11 @@ Note: Some patients have both a positive and a negative covid test (15,067) we c
 
 73,697 COVID + (74.5%),  19,045 COVID -  (20.5%)
 
-LigthGBM 5-Fold CV AUC 0.69201
-Cutoff: 0.777 optimizing F1 value. 
+- LigthGBM 5-Fold CV AUC 0.69201
+-- Cutoff: 0.777 optimizing F1 value. 
 
-LigthGBM 5-Fold CV AUC 
-Cutoff:  optimizing F1 value. 
+- NN 5-Fold CV AUC 0.68683
+-- Cutoff: 0.034 optimizing F1 value. 
 
 ### Risk Factors from LightGBM Model
 
@@ -93,32 +94,34 @@ Cutoff:  optimizing F1 value.
 -	Inpatient care plan (record artifact): Overall proxy for health status	
 - Inpatient stay (finding): Overall proxy for health status 	
 - Encounter for Problem: Overall proxy for health status 	
-- Transthoracic three dimensional ultrasonography of the heart: Heart disease status  	
 - Plain chest X-ray (procedure): Pulmonary health status 	
+- Transthoracic three dimensional ultrasonography of the heart: Heart disease status  	
 - Heart failure self management plan: Heart disease status 	
 - Chronic congestive heart failure (disorder)_ x : Heart disease status 		
 - Glomerular filtration rate/1.73 sq M.predicted : Kidney function marker	
 
 
 ## Days hospitalized
-LigthGBM model available at: 
-https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBMY_N.ipynb
+- LigthGBM model available at:
+-- https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBMY_N.ipynb
+-- https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBM.ipynb
 
-https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBM.ipynb
-
-NN Model available at: 
+- NN Model available at: 
 
 Hospitalized
 20,393  (27.7%)
 LOS 12.6 days
 
-Two models: 
-Model 1 to predict hospitalizations Y/N
-5-Fold CV AUC 0.67070
-Cutoff: 0.254 optimizing F1 value
+- Two LightGBM models: 
+-- Model 1 to predict hospitalizations Y/N
+-- 5-Fold CV AUC 0.67070
+-- Cutoff: 0.254 optimizing F1 value
 
-Model 2 to predict LOS
-5 fold rmse 4.46
+-- Model 2 to predict LOS
+-- 5 fold rmse 4.46
+
+- NN model:
+-- 5 fold rmse 6.58
 
 ### Risk Factors for Hospitalization and Length of Stay from LightGBM Model
 - Age 
@@ -136,23 +139,26 @@ Model 2 to predict LOS
 
 
 ## Days in ICU
-LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBMY_N.ipynb
+- LigthGBM model available at: 
+-- https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBMY_N.ipynb
+-- https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBM.ipynb
 
-https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBM.ipynb
-
-NN Model available at: 
+- NN model available at:
 
 ICU
 4,981 (6.8%)
 LOS 6.2 days
 
-Two models: 
-Model 1 to predict ICU stay Y/N
-5-Fold CV AUC 0.77167
-Cutoff: 0.146 optimizing F1 value
+- Two models: 
+-- Model 1 to predict ICU stay Y/N
+-- 5-Fold CV AUC 0.77167
+-- Cutoff: 0.146 optimizing F1 value
 
-Model 2 to predict LOS
-5 fold rmse 2.68
+-- Model 2 to predict LOS
+-- 5 fold rmse 2.68
+
+- NN model:
+- 5 fold rmse
 
 ### Risk Factors from LightGBM Model
 - Age
@@ -162,14 +168,14 @@ Model 2 to predict LOS
 - DALY: Disability-adjusted life year, is a measure of overall disease burden, expressed as the number of years lost due to ill-health, disability or early death. [3]
 
 ## Controlled Ventilator Status: 
-LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/LightGBM.ipynb
-
-NN Model available at: 
+- LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/LightGBM.ipynb
+- NN Model available at: 
 
 Ventilator
 4,210 (5.7%)
 
-5-Fold CV AUC 0.80562
+- 5-Fold CV AUC 0.80562
+- 5-Fold CV AUC 
 
 ### Risk Factors from LightGBM Model
 - Age
@@ -177,14 +183,16 @@ Ventilator
 - QALY: Quality-adjusted life-year is a generic measure of disease burden, including both the quality and the quantity of life lived.[1]
 - Healthcare Expenses: Overall proxy for health status 
 
+### Risk Factors for Length of Stay from NN Model
+
 
 ## Mortality: 
 LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/Death/LightGBM.ipynb
 
 Death
 5,568 (7.6%)
-5-Fold CV AUC 0.85728
-
+- 5-Fold CV AUC 0.85728
+- 5-Fold CV AUC 
 
 ### Risk Factors from LightGBM Model
 - Age
