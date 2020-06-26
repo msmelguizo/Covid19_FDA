@@ -177,7 +177,7 @@ LOS 6.2 days
 - DALY: Disability-adjusted life year, is a measure of overall disease burden, expressed as the number of years lost due to ill-health, disability or early death. [3]
 
 
-### Risk Factors for Length of Stay from NN Model
+### Risk Factor from NN Model
 - Admission to trauma (surgery department): Overall proxy for health status 
 - Bullet wound: Overall proxy for health status 
 - Primary malignant neoplasm of the colon: Cancer status
@@ -200,11 +200,14 @@ Ventilator
 - QALY: Quality-adjusted life-year is a generic measure of disease burden, including both the quality and the quantity of life lived.[1]
 - Healthcare Expenses: Overall proxy for health status 
 
-### Risk Factors for Length of Stay from NN Model
--
--
--
--
+### Risk Factors from NN Model
+- Piperacillin / Tazobactam: Previous infection status
+- Urine analysis resulst positive for: brown color, protein, ketone, and ammoniacal
+- Hyperlipidemia
+- Anemia
+
+### Protective Factors
+- Never smoker
 
 
 ## Mortality: 
