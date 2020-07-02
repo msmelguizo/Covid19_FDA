@@ -53,7 +53,7 @@ For the NN models we used the fastai library [4] with parameters:
 
 ## COVID 19 Status:
 - LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/COVID/LightGBM.ipynb
-- NN model available at:
+- NN model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/COVID/FastaiNN.ipynb
 
 We started the modeling process counting the patients that did not receive a test as Covid negative. This assumption proved not be valid as we have 25,217 patients in the train set that died prior to 2020. The model was getting biased to predict death, as those patients would not have the chance to contract COVID. Therefore our revised train set excludes the patients that died prior to 2020 and we predict in the test set that the patients with death certificates prior to 2020 will be COVID negative (6,306 patients).
 
@@ -108,8 +108,7 @@ Note: Some patients have both a positive and a negative covid test (15,067) we c
 - https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBMY_N.ipynb
 - https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/LightGBM.ipynb
 
-- NN Model available at: 
--
+- NN Model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysHospitalized/FastaiNN.ipynb
 
 Hospitalized
 20,393  (27.7%)
@@ -151,8 +150,7 @@ LOS 12.6 days
 - https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBMY_N.ipynb
 - https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/LightGBM.ipynb
 
-- NN model available at:
--
+- NN model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/DaysICU/FastaiNN.ipynb
 
 ICU
 4,981 (6.8%)
@@ -186,7 +184,7 @@ LOS 6.2 days
 
 ## Controlled Ventilator Status: 
 - LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/LightGBM.ipynb
-- NN Model available at: 
+- NN Model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/ControledVentilator/FastaiNN.ipynb
 
 Ventilator
 4,210 (5.7%)
@@ -211,7 +209,8 @@ Ventilator
 
 
 ## Mortality: 
-LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/Death/LightGBM.ipynb
+- LigthGBM model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/Death/LightGBM.ipynb
+- NN model available at: https://github.com/msmelguizo/Covid19_FDA/blob/master/Death/FastaiNN.ipynb
 
 Death
 5,568 (7.6%)
